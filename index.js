@@ -30,10 +30,9 @@ app.get("/", (req, res) => {
 
   res.setHeader("Content-Type", "image/jpeg");
   res.setHeader("Content-Length", image.length);
-  res.send("Yaash Thirukural");
 
   res.end(image);
 });
 
 const kuralRoute = require("./route/kuralroute")();
-app.use("/categories", kuralRoute);
+app.use("/thirukural", kuralRoute);

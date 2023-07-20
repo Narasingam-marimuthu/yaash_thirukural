@@ -1,22 +1,18 @@
 module.exports = () => {
   const kuralRoute = require("express-promise-router")();
   const dotenv = require("dotenv");
-  var categoryController = require("../controller/categoriesController");
+  var kuralController = require("../controller/kuralController");
   dotenv.config();
-  kuralRoute.route("/addKural").post(categoryController.addKural);
+  kuralRoute
+    .route("/getkuralById/:id")
+    .get(kuralController.getKuralByAdhigaramId);
 
-  kuralRoute.route("/getKural").get(categoryController.getKural);
-  // kuralRoute
-  //   .route("/getCategories/:id")
-  //   .get(categoryController.getCategoryById);
+  kuralRoute.route("/addKural").post(kuralController.addKural);
 
-  // kuralRoute
-  //   .route("/editCategories/:id")
-  //   .put(categoryController.editCategory);
+  kuralRoute.route("/getkural").get(kuralController.getKural);
 
-  // kuralRoute
-  //   .route("/deleteCategories")
-  //   .delete(categoryController.deleteCategory);
+  kuralRoute.route("/addadhigaram").post(kuralController.addAthigaram);
+  kuralRoute.route("/getadhigaram").get(kuralController.getAthigaram);
 
   return kuralRoute;
 };
