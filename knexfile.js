@@ -5,7 +5,7 @@ module.exports = {
       host: "localhost",
       user: "postgres",
       password: "jeyma_lara",
-      database: "thirukural_api",
+      database: "thirukural",
       charset: "utf8",
       pool: {
         min: 2,

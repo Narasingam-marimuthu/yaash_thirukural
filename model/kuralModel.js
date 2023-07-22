@@ -97,6 +97,9 @@ class Kural {
         message: "Kural list",
         data: results.map((obj) => ({
           id: obj.id,
+          paal_id: obj.paal_id,
+          eyal_id: obj.eyal_id,
+          athigaram_id: obj.athigaram_id,
           number: obj.number,
           sect_tam: obj.sect_tam,
           chapgrp_tam: obj.chapgrp_tam,
