@@ -35,4 +35,4 @@ app.get("/", (req, res) => {
 });
 
 const kuralRoute = require("./route/kuralroute")();
-app.use("/thirukural", kuralRoute);
+app.use("/api", kuralRoute);
