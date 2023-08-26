@@ -1,18 +1,15 @@
-module.exports = () => {
+export default () => {
   const kuralRoute = require("express-promise-router")();
   const dotenv = require("dotenv");
   var kuralController = require("../controller/kuralController");
   dotenv.config();
+
+  kuralRoute.route("/adhigaram").get(kuralController.getAthigaram);
   kuralRoute
-    .route("/getkuralById/:id")
-    .get(kuralController.getKuralByAdhigaramId);
-
-  kuralRoute.route("/addKural").post(kuralController.addKural);
-
-  kuralRoute.route("/getkural").get(kuralController.getKural);
-
-  kuralRoute.route("/addadhigaram").post(kuralController.addAthigaram);
-  kuralRoute.route("/getadhigaram").get(kuralController.getAthigaram);
+    .route("/kural")
+    .get(kuralController.getKural)
+    .post(kuralController.addKural);
+  kuralRoute.route("/kural/:id").get(kuralController.getKuralByAdhigaramId);
 
   return kuralRoute;
 };
