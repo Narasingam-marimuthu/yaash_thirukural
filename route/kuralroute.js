@@ -8,7 +8,7 @@ module.exports = () => {
   kuralRoute
     .route("/kural")
     .get(kuralController.getKural)
-    .post(kuralController.addKural);
+    .post(kuralController.generateText);
   kuralRoute.route("/kural/:id").get(kuralController.getKuralByAdhigaramId);
 
   return kuralRoute;

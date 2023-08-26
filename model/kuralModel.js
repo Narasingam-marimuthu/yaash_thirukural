@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const crypto = require("crypto");
 const fileUpload = require("../fileupload");
 dotenv.config();
+const axios = require("axios");
+const { PALM_API_KEY } = require("../config");
 
 class Kural {
   static async addAthigaram(athigaram) {
@@ -152,6 +154,37 @@ class Kural {
         message: "Error occured while fetching learntype data",
         data: {},
       };
+    }
+  }
+
+  static async generateText(prompt) {
+    try {
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText?key=${PALM_API_KEY}`;
+
+      const response = await axios.post(apiUrl, {
+        prompt,
+      });
+      console.log("value_response:", response.data.candidates[0].output);
+      const value = response.data.candidates[0].output;
+
+      let filterQuery = knex("thirukural").select("*");
+      let filterValue = await filterQuery;
+      console.log("filterValue :", filterValue);
+      if (response) {
+        return {
+          success: true,
+          message: "filter list",
+          data: response.data,
+        };
+      } else {
+        return {
+          success: false,
+          message: "Error occured while fetching learntype data",
+          data: {},
+        };
+      }
+    } catch (error) {
+      throw error;
     }
   }
 
