@@ -18,7 +18,7 @@ app.use(function (err, req, res, next) {
   });
 });
 // Start the server
-app.listen(5000, () => {
+app.listen(5001, () => {
   console.log("Server is running on port 5000");
 });
 
@@ -35,4 +35,6 @@ app.get("/", (req, res) => {
 });
 
 const kuralRoute = require("./route/kuralroute")();
+const aiKuralRoute = require("./route/aikuralroute")();
+app.use("/v1/ai",aiKuralRoute)
 app.use("/v1", kuralRoute);

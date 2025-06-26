@@ -62,6 +62,19 @@ module.exports = {
     }
   },
 
+  getKuralByNumber: async (req, res, next) => {
+    console.log(req.params,"req.params.number");
+    
+    let results = await Kural.getKuralByNumber(req.params.number);
+    if (results.success) {
+      res
+        .status(200)
+        .send({ status: 1, message: results.message, data: results.data });
+    } else {
+      res.status(400).send({ status: 0, message: results.message, data: {} });
+    }
+  },
+
   // filter: async (req, res, next) => {
   //   console.log("inside the function");
   //   console.log(req.body, "req.body");

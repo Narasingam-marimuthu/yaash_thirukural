@@ -5,6 +5,8 @@ const fileUpload = require("../fileupload");
 dotenv.config();
 const axios = require("axios");
 const { PALM_API_KEY } = require("../config");
+const fs = require("fs");
+const path = require("path");
 
 class Kural {
   static async addAthigaram(athigaram) {
@@ -52,6 +54,42 @@ class Kural {
       };
     }
   }
+
+  static async getKuralByNumber(kuralNumber) {
+    try {
+      console.log("inside getKuralByNumber");
+
+      // Read and parse the Tirukkural JSON file
+      const filePath = path.join(__dirname, "../thirukural.json"); // update path as needed
+      const rawData = fs.readFileSync(filePath, "utf-8");
+      const kurals = JSON.parse(rawData);
+
+      // Find the kural with the given number
+      const kural = kurals.find((k) => k.number === Number(kuralNumber));
+
+      if (!kural) {
+        return {
+          success: false,
+          message: "Kural not found",
+          data: {},
+        };
+      }
+
+      return {
+        success: true,
+        message: "Kural found",
+        data: kural,
+      };
+    } catch (err) {
+      console.error("Error reading Kural:", err);
+      return {
+        success: false,
+        message: "Error occurred while fetching Kural",
+        data: {},
+      };
+    }
+  }
+
   static async addKural(thirukural) {
     try {
       // console.log(thirukural, "req model");

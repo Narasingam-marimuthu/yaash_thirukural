@@ -6,6 +6,10 @@ module.exports = () => {
 
   kuralRoute.route("/adhigaram").get(kuralController.getAthigaram);
   kuralRoute
+    .route("/TirukuralByNumber/:number")
+    .get(kuralController.getKuralByNumber);
+
+  kuralRoute
     .route("/kural")
     .get(kuralController.getKural)
     .post(kuralController.generateText);
